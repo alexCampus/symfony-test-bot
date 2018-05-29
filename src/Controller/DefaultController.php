@@ -17,13 +17,16 @@ class DefaultController extends Controller
                     'text' => array(
                         'text' => array(
                             'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
+                        ),
+                        'text' => array(
+                            'Tu aime bien vivre à ' . $content["queryResult"]["parameters"]["ville"]
                         )
                     )
                 )
 
             )
         );
-        
+
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
         return $this->json($response);
 
