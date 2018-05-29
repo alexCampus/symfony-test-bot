@@ -39,6 +39,11 @@ class DefaultController extends Controller
 
             case 'codePostal':
                 break;
+
+            default:
+                $response = ["J'ai mal compris votre demande."];
+                break;
+
         }
 //        if ($data['intent']['displayName'] === 'City') {
 //
