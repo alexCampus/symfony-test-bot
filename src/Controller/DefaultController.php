@@ -36,9 +36,6 @@ class DefaultController extends Controller
                         file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($data["parameters"]["ville"]) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre")
             );
             if (count($city) > 0) {
-                var_dump($city);
-                var_dump($data["parameters"]["ville"]);
-                die;
                 foreach ($city as $c) {
                     if ($c->nom === $data["parameters"]["ville"]) {
                         $response = array(
@@ -46,6 +43,7 @@ class DefaultController extends Controller
                             'Cette ville est dans le département : ' . $c->codeDepartement,
                             'Elle a une population de : ' . number_format($c->population)
                         );
+                        exit();
                     } else {
                         $response = ["Malheureusement je ne connais pas cette ville...."];
                     }
