@@ -39,9 +39,11 @@ class DefaultController extends Controller
                 foreach ($city as $c) {
                     if ($c->nom === $data["parameters"]["ville"]) {
                         $departement = $this->getDepartement($c->codeDepartement);
+                        $region      = $this->getRegion($c->codeRegion);
                         $response = array(
                             'Tu vis à ' . $c->nom,
                             'Cette ville est dans le département : ' . $departement->nom . '(' . $departement->code . ')',
+                            'Cette ville est dans la région : ' . $region->nom . '(' . $region->code . ')',
                             'Elle a une population de : ' . number_format($c->population)
                         );
                         break;
@@ -71,9 +73,17 @@ class DefaultController extends Controller
     private function getDepartement($code)
     {
         $dep = json_decode(
-            file_get_contents("https://geo.api.gouv.fr/departements?code=" . $code ."&fields=nom")
+            file_get_contents("https://geo.api.gouv.fr/departements?code=" . $code ."&fields=nom,code")
         );
         return $dep[0];
+    }
+
+    private function getRegion($code)
+    {
+        $reg = json_decode(
+            file_get_contents("https://geo.api.gouv.fr/regions?code=" . $code ."&fields=nom,code")
+        );
+        return $reg[0];
     }
 
 }
