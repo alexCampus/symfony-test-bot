@@ -30,8 +30,11 @@ class DefaultController extends Controller
             ),
             "payload" => array(
                 "slack" => array(
-                    "This is a text response for Slack.",
-                    "This is a text response 2 for Slack."
+                    "text" => "This is a text response for Slack.",
+                    'type' => 0
+                ),array(
+                    "text" => "This is a text response for Slack.",
+                    'type' => 0
                 )
             )
         );
