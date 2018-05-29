@@ -30,7 +30,7 @@ class DefaultController extends Controller
                 break;
 
             case 'region':
-                var_dump($data["outputContexts"]);
+                var_dump($data["outputContexts"]["parameters"]["ville"]);
                 $response = $this->getRegion($data["outputContexts"]["parameters"]["ville"]);
                 var_dump($response);die;
                 break;
@@ -92,9 +92,9 @@ class DefaultController extends Controller
     }
 
     private function getRegion($city)
-    {
+    { var_dump($city);
         $data = $this->getCity($city);
-        var_dump($data);
+
         $reg = json_decode(file_get_contents("https://geo.api.gouv.fr/regions?code=" . $data->codeRegion . "&fields=nom,code"));
         var_dump($reg);
         return $reg[0];
