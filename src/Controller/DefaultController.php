@@ -25,11 +25,13 @@ class DefaultController extends Controller
     {
         switch ($data['intent']['displayName']) {
             case 'City':
-                $response = $this->getCity($data["parameters"]["ville"]);
+                $responseData = $this->getCity($data["parameters"]["ville"]);
+                $response = ['Tu vis à ' . $responseData->nom, "Quelles informations souhaites-tu? (code postal, population, département, région)"];
                 break;
 
             case 'region':
-                var_dump($data);die;
+                $response = $this->getRegion($data["outputContexts"]["parameters"]["ville"]);
+                var_dump($response);die;
                 break;
 
             case 'population':
@@ -88,9 +90,10 @@ class DefaultController extends Controller
         return $dep[0];
     }
 
-    private function getRegion($code)
+    private function getRegion($city)
     {
-        $reg = json_decode(file_get_contents("https://geo.api.gouv.fr/regions?code=" . $code . "&fields=nom,code"));
+        $data = $this->getCity($city);
+        $reg = json_decode(file_get_contents("https://geo.api.gouv.fr/regions?code=" . $city->codeRegion . "&fields=nom,code"));
         return $reg[0];
     }
 
@@ -101,7 +104,7 @@ class DefaultController extends Controller
         if (count($data) > 0) {
             foreach ($data as $c) {
                 if ($c->nom === $city) {
-                    $response = ['Tu vis à ' . $c->nom, "Quelles informations souhaites-tu? (code postal, population, département, région)"];
+                    $response = $c;
                 }
             }
         }
