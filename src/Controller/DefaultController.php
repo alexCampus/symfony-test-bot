@@ -27,9 +27,7 @@ class DefaultController extends Controller
         $response1 = array(
             'fulfillmentText' => 'Hello',
             'fulfillmentMessages'=> array(
-            ),
-            "payload" => array(
-                "slack" => array(
+                array(
                     "card" => array(
                         "title" => "card title",
                         "subtitle" => "card text",
@@ -42,7 +40,12 @@ class DefaultController extends Controller
                         )
                     )
                 )
-            )
+            ),
+//            "payload" => array(
+//                "slack" => array(
+//                    "text" => "This is a text response for Slack."
+//                )
+//            )
         );
 
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
