@@ -11,7 +11,7 @@ class DefaultController extends Controller
     {
         $content = json_decode($request->getContent(), true);
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
-        return $content["queryResult"]["parameters"]["ville"];
+        return $this->json(array('username' => 'jane.doe'));
 
     }
 
