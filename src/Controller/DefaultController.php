@@ -41,12 +41,23 @@ class DefaultController extends Controller
                     )
                 )
             ),
-//            "payload" => array(
-//                "slack" => array(
+            "payload" => array(
+                "slack" => array(
+                    "expectUserResponse" => true,
+                    "systemIntent" => array(
+                        "intent" => "actions.intent.CONFIRMATION",
+                        "data" => array(
+                            "@type"=> "type.googleapis.com/google.actions.v2.ConfirmationValueSpec",
+                            "dialogSpec" => array(
+                                "requestConfirmationText"=> "Please confirm your order."
+                            )
+                        )
+                    )
 //                    "text" => "This is a text response for Slack."
-//                )
-//            )
+                )
+            )
         );
+
 
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
         return $this->json($response1);
