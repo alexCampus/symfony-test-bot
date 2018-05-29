@@ -43,7 +43,7 @@ class DefaultController extends Controller
                             'Cette ville est dans le département : ' . $c->codeDepartement,
                             'Elle a une population de : ' . number_format($c->population)
                         );
-                        exit();
+                        break;
                     } else {
                         $response = ["Malheureusement je ne connais pas cette ville...."];
                     }
