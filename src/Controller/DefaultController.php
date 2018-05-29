@@ -27,6 +27,14 @@ class DefaultController extends Controller
         $response1 = array(
             'fulfillmentText' => 'Hello',
             'fulfillmentMessages'=> array(
+                array(
+                    "text" => "This is a text response 1 for Slack.",
+                    'type' => 0
+                ),
+                array(
+                    "text" => "This is a text response 2 for Slack.",
+                    'type' => 0
+                )
             ),
             "payload" => array(
                 "slack" => array(
