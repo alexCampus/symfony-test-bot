@@ -93,7 +93,9 @@ class DefaultController extends Controller
     private function getRegion($city)
     {
         $data = $this->getCity($city);
+        var_dump($data);
         $reg = json_decode(file_get_contents("https://geo.api.gouv.fr/regions?code=" . $city->codeRegion . "&fields=nom,code"));
+        var_dump($reg);
         return $reg[0];
     }
 
