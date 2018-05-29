@@ -93,7 +93,7 @@ class DefaultController extends Controller
     private function getCity($city)
     {
         $data = json_decode(file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($city) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre"));
-        var_dump($data);die;
+
         if (count($data) > 0) {
             foreach ($data as $c) {
                 if ($c->nom === $data) {
@@ -101,6 +101,7 @@ class DefaultController extends Controller
                 }
             }
         }
+        var_dump($response);die;
         return $response;
     }
 
