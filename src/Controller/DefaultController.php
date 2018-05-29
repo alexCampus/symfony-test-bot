@@ -28,11 +28,6 @@ class DefaultController extends Controller
             'fulfillmentText' => 'Hello',
             'fulfillmentMessages'=> array(
                 array(
-                    'text' => array(
-                        'text' => array(
-                            'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
-                        )
-                    ),
                     "card" => array(
                         "title" => "card title",
                         "subtitle" => "card text",
@@ -44,6 +39,11 @@ class DefaultController extends Controller
                             )
                         )
                     )
+                )
+            ),
+            "payload" => array(
+                "slack" => array(
+                    "text" => "This is a text response for Slack."
                 )
             )
         );
