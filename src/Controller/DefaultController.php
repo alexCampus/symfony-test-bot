@@ -10,7 +10,7 @@ class DefaultController extends Controller
     public function index(Request $request)
     {
         $content = json_decode($request->getContent(), true);
-        $test = $this-><$this->webhook($content['queryResult']);
+        $test = $this->webhook($content['queryResult']);
 //        var_dump('REQUEST',$content["queryResult"]);
         $response = array(
             'fulfillmentText' => 'Hello',
