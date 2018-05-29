@@ -30,6 +30,7 @@ class DefaultController extends Controller
                 break;
 
             case 'region':
+                var_dump($data["outputContexts"]);
                 $response = $this->getRegion($data["outputContexts"]["parameters"]["ville"]);
                 var_dump($response);die;
                 break;
