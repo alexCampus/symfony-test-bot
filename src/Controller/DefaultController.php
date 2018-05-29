@@ -12,15 +12,14 @@ class DefaultController extends Controller
         $content = json_decode($request->getContent(), true);
         $response = array(
             'fulfillmentText' => 'Hello',
-                array(
-                    'fulfillmentMessages' => array(
-                        'text' => array(
-                            'text' => array(
-                                'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
-                            )
-                        )
+            'fulfillmentMessages'=> array(
+                'text' => array(
+                    'text' => array(
+                        'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
                     )
                 )
+                    
+            )
         );
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
         return $this->json($response);
