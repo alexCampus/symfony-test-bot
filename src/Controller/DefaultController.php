@@ -17,9 +17,6 @@ class DefaultController extends Controller
                     'text' => array(
                         'text' => array(
                             'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
-                        ),
-                        'text' => array(
-                            'Tu aime bien vivre à ' . $content["queryResult"]["parameters"]["ville"]
                         )
                     )
                 )
@@ -27,8 +24,27 @@ class DefaultController extends Controller
             )
         );
 
+        $response1 = array(
+            'fulfillmentText' => 'Hello',
+            'fulfillmentMessages'=> array(
+                array(
+                    "card"=> array(
+                        "title"=> "card title",
+                            "subtitle"=> "card text",
+                                "imageUri"=> "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+                                "buttons"=> array(
+                                array(
+                                    "text" => "button text",
+                                    "postback" => "https://assistant.google.com/"
+                                )
+                        )
+                    )
+                )
+            )
+        );
+
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
-        return $this->json($response);
+        return $this->json($response1);
 
     }
 
