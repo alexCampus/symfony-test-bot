@@ -10,8 +10,20 @@ class DefaultController extends Controller
     public function index(Request $request)
     {
         $content = json_decode($request->getContent(), true);
+        $response = array(
+            'fulfillmentText' => 'Hello',
+                array(
+                    'fulfillmentMessages' => array(
+                        'text' => array(
+                            'text' => array(
+                                'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
+                            )
+                        )
+                    )
+                )
+        );
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
-        return $this->json(array('username' => 'jane.doe'));
+        return $this->json($response);
 
     }
 
