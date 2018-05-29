@@ -10,19 +10,11 @@ class DefaultController extends Controller
     public function index(Request $request)
     {
         $content = json_decode($request->getContent(), true);
-        $test = $this->webhook($content['queryResult']);
+        $test    = $this->webhook($content['queryResult']);
 //        var_dump('REQUEST',$content["queryResult"]);
-        $response = array(
-            'fulfillmentText' => 'Hello',
-            'fulfillmentMessages'=> array(
-                array(
-                    'text' => array(
-                        'text' => $test
-                    )
-                )
+        $response = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [['text' => ['text' => $test]]
 
-            )
-        );
+        ]];
 
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
         return $this->json($response);
@@ -31,59 +23,79 @@ class DefaultController extends Controller
 
     private function webhook($data)
     {
-        if ($data['intent']['displayName'] === 'City') {
-            $city = json_decode(
-                        file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($data["parameters"]["ville"]) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre")
-            );
-            if (count($city) > 0) {
-                foreach ($city as $c) {
-                    if ($c->nom === $data["parameters"]["ville"]) {
-                        $departement = $this->getDepartement($c->codeDepartement);
-                        $region      = $this->getRegion($c->codeRegion);
-                        $response = array(
-                            'Tu vis à ' . $c->nom,
-                            'Cette ville est dans le département : ' . $departement->nom . '(' . $departement->code . ')',
-                            'Cette ville est dans la région : ' . $region->nom . '(' . $region->code . ')',
-                            'Elle a une population de : ' . number_format($c->population)
-                        );
-                        break;
-                    } else {
-                        $response = ["Malheureusement je ne connais pas cette ville...."];
-                    }
-                }
-            }
+        switch ($data['intent']['displayName']) {
+            case 'City':
+                $response = $this->getCity($data["parameters"]["ville"]);
+                break;
 
-        } else {
-            $response = ["J'ai mal compris votre demande."];
+            case 'region':
+                break;
+
+            case 'population':
+                break;
+
+            case 'departement':
+                break;
+
+            case 'codePostal':
+                break;
         }
+//        if ($data['intent']['displayName'] === 'City') {
+//
+//            if (count($city) > 0) {
+//                foreach ($city as $c) {
+//                    if ($c->nom === $data["parameters"]["ville"]) {
+//                        $departement = $this->getDepartement($c->codeDepartement);
+//                        $region      = $this->getRegion($c->codeRegion);
+//                        $response    = ['Tu vis à ' . $c->nom, 'Cette ville est dans le département : ' . $departement->nom . '(' . $departement->code . ')', 'Cette ville est dans la région : ' . $region->nom . '(' . $region->code . ')', 'Elle a une population de : ' . number_format($c->population)];
+//                        break;
+//                    } else {
+//                        $response = ["Malheureusement je ne connais pas cette ville...."];
+//                    }
+//                }
+//            }
+//
+//        } else {
+//            $response = ["J'ai mal compris votre demande."];
+//        }
         return $response;
     }
 
-    private function skip_accents( $str, $charset='utf-8' ) {
+    private function skip_accents($str, $charset = 'utf-8')
+    {
 
-        $str = htmlentities( $str, ENT_NOQUOTES, $charset );
+        $str = htmlentities($str, ENT_NOQUOTES, $charset);
 
-        $str = preg_replace( '#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str );
-        $str = preg_replace( '#&([A-za-z]{2})(?:lig);#', '\1', $str );
-        $str = preg_replace( '#&[^;]+;#', '', $str );
+        $str = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+        $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str);
+        $str = preg_replace('#&[^;]+;#', '', $str);
 
         return $str;
     }
 
     private function getDepartement($code)
     {
-        $dep = json_decode(
-            file_get_contents("https://geo.api.gouv.fr/departements?code=" . $code ."&fields=nom,code")
-        );
+        $dep = json_decode(file_get_contents("https://geo.api.gouv.fr/departements?code=" . $code . "&fields=nom,code"));
         return $dep[0];
     }
 
     private function getRegion($code)
     {
-        $reg = json_decode(
-            file_get_contents("https://geo.api.gouv.fr/regions?code=" . $code ."&fields=nom,code")
-        );
+        $reg = json_decode(file_get_contents("https://geo.api.gouv.fr/regions?code=" . $code . "&fields=nom,code"));
         return $reg[0];
+    }
+
+    private function getCity($city)
+    {
+        $reg =  $city = json_decode(file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($city) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre"));
+        if (count($city) > 0) {
+            foreach ($city as $c) {
+                if ($c->nom === $city) {
+                    $response = ['Tu vis à ' . $c->nom, "Quelles informations souhaites-tu? (code postal, population, département, région)"];
+                }
+            }
+        }
+        return $response;
     }
 
 }
