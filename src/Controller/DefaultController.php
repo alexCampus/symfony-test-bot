@@ -29,7 +29,7 @@ class DefaultController extends Controller
                 break;
 
             case 'region':
-                var_dump($data["parameters"]);die;
+                var_dump($data);die;
                 break;
 
             case 'population':
