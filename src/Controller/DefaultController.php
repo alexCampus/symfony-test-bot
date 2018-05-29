@@ -10,7 +10,7 @@ class DefaultController extends Controller
     public function index(Request $request)
     {
         $content = json_decode($request->getContent(), true);
-        var_dump('REQUEST',$content);
+        var_dump('REQUEST',$content["queryResult"]);
         die;
         return $this->render('index.html.twig');
     }
