@@ -14,7 +14,7 @@ class DefaultController extends Controller
 
     public function webhook(Request $request)
     {
-        dump($request);
+        var_dump($request);die;
     }
 
 }
