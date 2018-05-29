@@ -27,26 +27,21 @@ class DefaultController extends Controller
         $response1 = array(
             'fulfillmentText' => 'Hello',
             'fulfillmentMessages'=> array(
-                array(
-                    array(
-                        "text" => "This is a text response 1 for Slack.",
-                    ),
-                    array(
-                        "text" => "This is a text response 2 for Slack.",
-                    )
-                )
             ),
             "payload" => array(
                 "slack" => array(
-                    array(
-                        "text" => "This is a text response 1 for Slack.",
-                        'type' => 0
-                    ),
-                    array(
-                        "text" => "This is a text response 2 for Slack.",
-                        'type' => 0
+                    "card" => array(
+                        "title" => "card title",
+                        "subtitle" => "card text",
+                        "imageUri"=> "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+                        "buttons"=> array(
+                            array(
+                                "text" => "button text",
+                                "postback" => "https://assistant.google.com/"
+                            )
+                        )
                     )
-                ),
+                )
             )
         );
 
