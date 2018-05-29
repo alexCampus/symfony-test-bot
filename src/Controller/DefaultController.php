@@ -28,15 +28,20 @@ class DefaultController extends Controller
             'fulfillmentText' => 'Hello',
             'fulfillmentMessages'=> array(
                 array(
-                    "card"=> array(
-                        "title"=> "card title",
-                            "subtitle"=> "card text",
-                                "imageUri"=> "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
-                                "buttons"=> array(
-                                array(
-                                    "text" => "button text",
-                                    "postback" => "https://assistant.google.com/"
-                                )
+                    'text' => array(
+                        'text' => array(
+                            'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
+                        )
+                    ),
+                    "card" => array(
+                        "title" => "card title",
+                        "subtitle" => "card text",
+                        "imageUri"=> "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+                        "buttons"=> array(
+                            array(
+                                "text" => "button text",
+                                "postback" => "https://assistant.google.com/"
+                            )
                         )
                     )
                 )
