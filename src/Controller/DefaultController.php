@@ -10,6 +10,7 @@ class DefaultController extends Controller
     public function index(Request $request)
     {
         $content = json_decode($request->getContent(), true);
+        var_dump('REQUEST',$content);
         $response = array(
             'fulfillmentText' => 'Hello',
             'fulfillmentMessages'=> array(
@@ -24,49 +25,14 @@ class DefaultController extends Controller
             )
         );
 
-        $response1 = array(
-            'fulfillmentText' => 'Hello',
-            'fulfillmentMessages'=> array(
-                array(
-                    "card" => array(
-                        "title" => "card title",
-                        "subtitle" => "card text",
-                        "imageUri"=> "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
-                        "buttons"=> array(
-                            array(
-                                "text" => "button text",
-                                "postback" => "https://assistant.google.com/"
-                            )
-                        )
-                    )
-                )
-            ),
-            "payload" => array(
-                "slack" => array(
-                    "expectUserResponse" => true,
-                    "systemIntent" => array(
-                        "intent" => "actions.intent.CONFIRMATION",
-                        "data" => array(
-                            "@type"=> "type.googleapis.com/google.actions.v2.ConfirmationValueSpec",
-                            "dialogSpec" => array(
-                                "requestConfirmationText"=> "Please confirm your order."
-                            )
-                        )
-                    )
-//                    "text" => "This is a text response for Slack."
-                )
-            )
-        );
-
-
 //        var_dump('REQUEST',$content["queryResult"]["parameters"]["ville"]);
-        return $this->json($response1);
+        return $this->json($response);
 
     }
 
-    public function webhook(Request $request)
+    private function webhook($data)
     {
-        var_dump($request);die;
+
     }
 
 }
