@@ -28,12 +28,12 @@ class DefaultController extends Controller
             'fulfillmentText' => 'Hello',
             'fulfillmentMessages'=> array(
                 array(
-                    "text" => "This is a text response 1 for Slack.",
-                    'type' => 0
-                ),
-                array(
-                    "text" => "This is a text response 2 for Slack.",
-                    'type' => 0
+                    array(
+                        "text" => "This is a text response 1 for Slack.",
+                    ),
+                    array(
+                        "text" => "This is a text response 2 for Slack.",
+                    )
                 )
             ),
             "payload" => array(
