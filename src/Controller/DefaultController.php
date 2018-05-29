@@ -36,6 +36,9 @@ class DefaultController extends Controller
                         file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($data["parameters"]["ville"]) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre")
             );
             if (count($city) > 0) {
+                var_dump($city);
+                var_dump($data["parameters"]["ville"]);
+                die;
                 foreach ($city as $c) {
                     if ($c->nom === $data["parameters"]["ville"]) {
                         $response = array(
