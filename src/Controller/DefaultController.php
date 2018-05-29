@@ -7,8 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        var_dump($request);die;
         return $this->render('index.html.twig');
     }
 
