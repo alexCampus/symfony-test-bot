@@ -16,7 +16,7 @@ class DefaultController extends Controller
                     'fulfillmentMessages' => array(
                         'text' => array(
                             'text' => array(
-                                'Tu vis à ' . $content["queryResult"]["parameters"]["ville"]
+                                'Tu vis Ã  ' . $content["queryResult"]["parameters"]["ville"]
                             )
                         )
                     )
