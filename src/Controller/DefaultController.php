@@ -92,10 +92,10 @@ class DefaultController extends Controller
 
     private function getCity($city)
     {
-        $city = json_decode(file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($city) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre"));
-        if (count($city) > 0) {
-            foreach ($city as $c) {
-                if ($c->nom === $city) {
+        $data = json_decode(file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($city) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre"));
+        if (count($data) > 0) {
+            foreach ($data as $c) {
+                if ($c->nom === $data) {
                     $response = ['Tu vis à ' . $c->nom, "Quelles informations souhaites-tu? (code postal, population, département, région)"];
                 }
             }
