@@ -96,12 +96,11 @@ class DefaultController extends Controller
 
         if (count($data) > 0) {
             foreach ($data as $c) {
-                if ($c->nom === $data) {
+                if ($c->nom === $city) {
                     $response = ['Tu vis à ' . $c->nom, "Quelles informations souhaites-tu? (code postal, population, département, région)"];
                 }
             }
         }
-        var_dump($response);die;
         return $response;
     }
 
