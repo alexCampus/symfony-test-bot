@@ -17,9 +17,9 @@ class MeteoInformation
     private function getPrevisionMeteo($meteo)
     {
         $now       = new DateTime();
-        $timestamp = $now->format('Y-m-d H:i:s');
+        $timestamp1 = $now->format('Y-m-d H:i:s');
         $timestamp = $now->getTimestamp();
-        var_dump($timestamp);die;
+        var_dump($timestamp1);die;
         return true;
     }
 }
