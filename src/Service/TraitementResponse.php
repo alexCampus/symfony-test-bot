@@ -43,6 +43,7 @@ class TraitementResponse
                     break;
                 case 'meteo':
                     $responseData = $this->meteoInfo->getMeteo($city);
+                    var_dump($responseData);die;
                     break;
             }
         } else {
