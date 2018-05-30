@@ -34,7 +34,8 @@ class DefaultController extends Controller
                     $city = $output['parameters']['ville'] ?? null;
                 }
                 if ($city != null) {
-                    $response = $this->getRegion($city);
+                    $responseData = $this->getRegion($city);
+                    $response = [$city . ' se situe dans la région de ' . $responseData->nom . ' (' . $responseData->code . ')'];
                 } else {
                     $response = ["Oups je n'ai pas bien compris votre demande"];
                 }
@@ -97,11 +98,9 @@ class DefaultController extends Controller
     }
 
     private function getRegion($city)
-    { var_dump($city);
+    {
         $data = $this->getCity($city);
-
         $reg = json_decode(file_get_contents("https://geo.api.gouv.fr/regions?code=" . $data->codeRegion . "&fields=nom,code"));
-        var_dump($reg);
         return $reg[0];
     }
 
