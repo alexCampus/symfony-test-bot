@@ -5,14 +5,15 @@ namespace App\Service;
 
 class Webhook
 {
-    private $geoInformation;
+    private $traitementResponse;
 
-    public function __construct(GeoInformation $geoInformation)
+
+    public function __construct(TraitementResponse $traitementResponse)
     {
-        $this->geoInformation = $geoInformation;
+        $this->traitementResponse = $traitementResponse;
     }
 
-    public function responseTraitement($data)
+    public function getIntent($data)
     {
         switch ($data['intent']['displayName']) {
             case 'City':
@@ -20,19 +21,23 @@ class Webhook
                 break;
 
             case 'region':
-                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'region');
+                $response = $this->traitementResponse->traitementResponse($data["outputContexts"], 'region');
                 break;
 
             case 'population':
-                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'population');
+                $response = $this->traitementResponse->traitementResponse($data["outputContexts"], 'population');
                 break;
 
             case 'departement':
-                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'departement');
+                $response = $this->traitementResponse->traitementResponse($data["outputContexts"], 'departement');
                 break;
 
             case 'codePostal':
-                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'codePostal');
+                $response = $this->traitementResponse->traitementResponse($data["outputContexts"], 'codePostal');
+                break;
+
+            case 'Meteo':
+                $response = $this->traitementResponse->traitementResponse($data["outputContexts"], 'meteo');
                 break;
 
             default:

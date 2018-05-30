@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/Controller/DefaultController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Service/GeoInformation.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Service/Webhook.php" charset="UTF-8" />
   </component>
 </project>
