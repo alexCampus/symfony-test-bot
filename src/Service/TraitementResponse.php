@@ -44,8 +44,6 @@ class TraitementResponse
                 case 'meteo':
                     $responseData = $this->meteoInfo->getMeteo($city);
                     $time = preg_split('/ /',$responseData['dt_txt']);
-                    $date =
-//                    var_dump($responseData['rain']['3h']);
                     $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
                         "il devrait tombé dans en 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie',
                         'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'];
