@@ -17,9 +17,9 @@ class DefaultController extends Controller
 
     public function index(Request $request)
     {
-        $content = json_decode($request->getContent(), true);
-        $test    = $this->webhook($content['queryResult']);
-        $response = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [['text' => ['text' => $test]]
+        $content      = json_decode($request->getContent(), true);
+        $responseText = $this->webhook($content['queryResult']);
+        $response     = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [['text' => ['text' => $responseText]]
 
         ]];
 
@@ -31,9 +31,7 @@ class DefaultController extends Controller
     {
         switch ($data['intent']['displayName']) {
             case 'City':
-                var_dump($data["outputContexts"]);die;
-                $responseData = $this->geoInformation->getCityData($data["parameters"]["ville"]);
-                $response = ['Tu vis à ' . $responseData->nom, "Quelles informations souhaites-tu? (code postal, population, département, région)"];
+                $response = ['Tu vis à ' . $data["parameters"]["ville"], "Quelles informations souhaites-tu? (code postal, population, département, région)"];
                 break;
 
             case 'region':

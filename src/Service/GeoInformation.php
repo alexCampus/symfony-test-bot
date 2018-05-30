@@ -43,19 +43,19 @@ class GeoInformation
             switch ($textResponse) {
                 case 'region':
                     $responseData = $this->getRegion($city);
-                    $response = [$city . ' se situe dans la région de ' . $responseData->nom . ' (' . $responseData->code . ')'];
+                    $response     = [$city . ' se situe dans la région de ' . $responseData->nom . ' (' . $responseData->code . ')'];
                     break;
                 case 'departement':
                     $responseData = $this->getDepartement($city);
-                    $response = [$city . ' se situe dans le département de ' . $responseData->nom . ' (' . $responseData->code . ')'];
+                    $response     = [$city . ' se situe dans le département de ' . $responseData->nom . ' (' . $responseData->code . ')'];
                     break;
                 case 'population':
                     $responseData = $this->getCityData($city);
-                    $response = ['A  ' . $responseData->nom . ", il y une population de " . number_format($responseData->population) . ' hab'];
+                    $response     = ['A  ' . $responseData->nom . ", il y une population de " . number_format($responseData->population) . ' hab'];
                     break;
                 case 'codePostal':
                     $responseData = $this->getCityData($city);
-                    $response = array($city . ' possède les codes postaux suivant : ');
+                    $response     = [$city . ' possède les codes postaux suivant : '];
                     foreach ($responseData->codesPostaux as $key => $data) {
                         array_push($response, $key+1 . ' : ' . $data);
                     }
