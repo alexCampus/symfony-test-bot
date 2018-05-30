@@ -22,7 +22,7 @@ class DefaultController extends Controller
         $response = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [['text' => ['text' => $test]]
 
         ]];
-        
+
         return $this->json($response);
 
     }
@@ -36,54 +36,58 @@ class DefaultController extends Controller
                 break;
 
             case 'region':
-                foreach ($data["outputContexts"] as $output) {
-                    $city = $output['parameters']['ville'] ?? null;
-                }
-                if ($city != null) {
-                    $responseData = $this->geoInformation->getRegion($city);
-                    $response = [$city . ' se situe dans la région de ' . $responseData->nom . ' (' . $responseData->code . ')'];
-                } else {
-                    $response = ["Oups je n'ai pas bien compris votre demande"];
-                }
+                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'region');
+//                foreach ($data["outputContexts"] as $output) {
+//                    $city = $output['parameters']['ville'] ?? null;
+//                }
+//                if ($city != null) {
+//                    $responseData = $this->geoInformation->getRegion($city);
+//                    $response = [$city . ' se situe dans la région de ' . $responseData->nom . ' (' . $responseData->code . ')'];
+//                } else {
+//                    $response = ["Oups je n'ai pas bien compris votre demande"];
+//                }
                 break;
 
             case 'population':
-                foreach ($data["outputContexts"] as $output) {
-                    $city = $output['parameters']['ville'] ?? null;
-                }
-                if ($city != null) {
-                    $responseData = $this->geoInformation->getCityData($city);
-                    $response = ['A  ' . $responseData->nom . ", il y une population de " . number_format($responseData->population) . ' hab'];
-                } else {
-                    $response = ["Oups je n'ai pas bien compris votre demande"];
-                }
+                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'population');
+//                foreach ($data["outputContexts"] as $output) {
+//                    $city = $output['parameters']['ville'] ?? null;
+//                }
+//                if ($city != null) {
+//                    $responseData = $this->geoInformation->getCityData($city);
+//                    $response = ['A  ' . $responseData->nom . ", il y une population de " . number_format($responseData->population) . ' hab'];
+//                } else {
+//                    $response = ["Oups je n'ai pas bien compris votre demande"];
+//                }
                 break;
 
             case 'departement':
-                foreach ($data["outputContexts"] as $output) {
-                    $city = $output['parameters']['ville'] ?? null;
-                }
-                if ($city != null) {
-                    $responseData = $this->geoInformation->getDepartement($city);
-                    $response = [$city . ' se situe dans le département de ' . $responseData->nom . ' (' . $responseData->code . ')'];
-                } else {
-                    $response = ["Oups je n'ai pas bien compris votre demande"];
-                }
+                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'departement');
+//                foreach ($data["outputContexts"] as $output) {
+//                    $city = $output['parameters']['ville'] ?? null;
+//                }
+//                if ($city != null) {
+//                    $responseData = $this->geoInformation->getDepartement($city);
+//                    $response = [$city . ' se situe dans le département de ' . $responseData->nom . ' (' . $responseData->code . ')'];
+//                } else {
+//                    $response = ["Oups je n'ai pas bien compris votre demande"];
+//                }
                 break;
 
             case 'codePostal':
-                foreach ($data["outputContexts"] as $output) {
-                    $city = $output['parameters']['ville'] ?? null;
-                }
-                if ($city != null) {
-                    $responseData = $this->geoInformation->getCityData($city);
-                    $response = array($city . ' possède les codes postaux suivant : ');
-                    foreach ($responseData->codesPostaux as $key => $data) {
-                        array_push($response, $key+1 . ' : ' . $data);
-                    }
-                } else {
-                    $response = ["Oups je n'ai pas bien compris votre demande"];
-                }
+                $response = $this->geoInformation->traitementResponse($data["outputContexts"], 'codePostal');
+//                foreach ($data["outputContexts"] as $output) {
+//                    $city = $output['parameters']['ville'] ?? null;
+//                }
+//                if ($city != null) {
+//                    $responseData = $this->geoInformation->getCityData($city);
+//                    $response = array($city . ' possède les codes postaux suivant : ');
+//                    foreach ($responseData->codesPostaux as $key => $data) {
+//                        array_push($response, $key+1 . ' : ' . $data);
+//                    }
+//                } else {
+//                    $response = ["Oups je n'ai pas bien compris votre demande"];
+//                }
                 break;
 
             default:
@@ -93,6 +97,8 @@ class DefaultController extends Controller
         }
         return $response;
     }
+
+
 
 
 
