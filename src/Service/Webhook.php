@@ -16,7 +16,7 @@ class Webhook
     {
         switch ($data['intent']['displayName']) {
             case 'City':
-                $response = ['Tu souhaites des informations sur  ' . $data["parameters"]["ville"] . '.', "Quelles informations souhaites-tu? (code postal, population, département, région)"];
+                $response = ['Tu souhaites des informations sur  ' . $data["parameters"]["ville"] . '.', "Quelles informations souhaites-tu? (code postal, population, dÃ©partement, rÃ©gion)"];
                 break;
 
             case 'region':
