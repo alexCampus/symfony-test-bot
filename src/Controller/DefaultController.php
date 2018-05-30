@@ -54,11 +54,30 @@ class DefaultController extends Controller
                 break;
 
             case 'departement':
-                var_dump($data["parameters"]);die;
+                foreach ($data["outputContexts"] as $output) {
+                    $city = $output['parameters']['ville'] ?? null;
+                }
+                if ($city != null) {
+                    $responseData = $this->getDepartement($city);
+                    $response = [$city . ' se situe dans le département de ' . $responseData->nom . ' (' . $responseData->code . ')'];
+                } else {
+                    $response = ["Oups je n'ai pas bien compris votre demande"];
+                }
                 break;
 
             case 'codePostal':
-                var_dump($data["parameters"]);die;
+                foreach ($data["outputContexts"] as $output) {
+                    $city = $output['parameters']['ville'] ?? null;
+                }
+                if ($city != null) {
+                    $responseData = $this->getCityData($city);
+                    $response = array($city . ' possède les codes postaux suivant : ');
+                    foreach ($responseData->codesPostaux as $data) {
+                        array_push($response, $data);
+                    }
+                } else {
+                    $response = ["Oups je n'ai pas bien compris votre demande"];
+                }
                 break;
 
             default:
@@ -66,24 +85,6 @@ class DefaultController extends Controller
                 break;
 
         }
-//        if ($data['intent']['displayName'] === 'City') {
-//
-//            if (count($city) > 0) {
-//                foreach ($city as $c) {
-//                    if ($c->nom === $data["parameters"]["ville"]) {
-//                        $departement = $this->getDepartement($c->codeDepartement);
-//                        $region      = $this->getRegion($c->codeRegion);
-//                        $response    = ['Tu vis à ' . $c->nom, 'Cette ville est dans le département : ' . $departement->nom . '(' . $departement->code . ')', 'Cette ville est dans la région : ' . $region->nom . '(' . $region->code . ')', 'Elle a une population de : ' . number_format($c->population)];
-//                        break;
-//                    } else {
-//                        $response = ["Malheureusement je ne connais pas cette ville...."];
-//                    }
-//                }
-//            }
-//
-//        } else {
-//            $response = ["J'ai mal compris votre demande."];
-//        }
         return $response;
     }
 
