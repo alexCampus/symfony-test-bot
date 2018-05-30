@@ -48,7 +48,7 @@ class TraitementResponse
 //                    var_dump($responseData['rain']['3h']);
                     $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
                         "La probalité de pluie dans les 3h est de : " . ceil($responseData['rain']['3h']*100) . '%',
-                        'imageUri' => 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'];
+                        'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'];
                     break;
             }
         } else {
