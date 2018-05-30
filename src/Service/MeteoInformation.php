@@ -20,7 +20,7 @@ class MeteoInformation
         $now       = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $timestamp = $now->getTimestamp();
-        foreach ($meteo['list'] as $data) {
+        foreach ($meteo->list as $data) {
             if ($data['dt'] > $timestamp) {
                 $dataMeteo = $data;
             }
