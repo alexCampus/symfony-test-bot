@@ -22,19 +22,16 @@ class DefaultController extends Controller
     {
         $content      = json_decode($request->getContent(), true);
         $responseText = $this->webhook->getIntent($content['queryResult']);
-        $response     = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [
-            [
-//                'text' => ['text' => $responseText],
-                'card' => [
-                    'title' => 'test',
-                    "imageUri" => "https://www.testclan.com/images/testbot/siege/weapons/assault-rifles.jpg",
-                    "buttons" => [
-                        [
-                            'text' => 'textttt'
-                        ]
-                    ]
-                ],
-            ]]];
+        $response     = ['fulfillmentText' => 'Hello',
+                         'fulfillmentMessages' => 
+                             [
+                                 [
+                                     'text' => [
+                                         'text' => $responseText
+                                     ]
+                                 ]
+                            ]
+                        ];
 
         return $this->json($response);
 
