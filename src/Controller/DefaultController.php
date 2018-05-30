@@ -25,7 +25,7 @@ class DefaultController extends Controller
     {
         switch ($data['intent']['displayName']) {
             case 'City':
-                $responseData = $this->getCity($data["parameters"]["ville"]);
+                $responseData = $this->getCityData($data["parameters"]["ville"]);
                 $response = ['Tu vis à ' . $responseData->nom, "Quelles informations souhaites-tu? (code postal, population, département, région)"];
                 break;
 
@@ -42,7 +42,8 @@ class DefaultController extends Controller
                 break;
 
             case 'population':
-                var_dump($data["parameters"]);die;
+                $responseData = $this->getCityData($data["parameters"]["ville"]);
+                $response = ['A  ' . $responseData->nom, ", il y une population de " . number_format($responseData->population) . ' hab'];
                 break;
 
             case 'departement':
@@ -99,12 +100,12 @@ class DefaultController extends Controller
 
     private function getRegion($city)
     {
-        $data = $this->getCity($city);
+        $data = $this->getCityData($city);
         $reg = json_decode(file_get_contents("https://geo.api.gouv.fr/regions?code=" . $data->codeRegion . "&fields=nom,code"));
         return $reg[0];
     }
 
-    private function getCity($city)
+    private function getCityData($city)
     {
         $data = json_decode(file_get_contents("https://geo.api.gouv.fr/communes?nom=" . $this->skip_accents($city) . "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre"));
 
