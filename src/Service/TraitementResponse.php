@@ -24,11 +24,11 @@ class TraitementResponse
             switch ($textResponse) {
                 case 'region':
                     $responseData = $this->geoInformation->getRegion($city);
-                    $response     = [$city . ' se situe dans la région de ' . $responseData->nom . ' (' . $responseData->code . ')'];
+                    $response     = [$city . ' se situe dans la rÃ©gion de ' . $responseData->nom . ' (' . $responseData->code . ')'];
                     break;
                 case 'departement':
                     $responseData = $this->geoInformation->getDepartement($city);
-                    $response     = [$city . ' se situe dans le département de ' . $responseData->nom . ' (' . $responseData->code . ')'];
+                    $response     = [$city . ' se situe dans le dÃ©partement de ' . $responseData->nom . ' (' . $responseData->code . ')'];
                     break;
                 case 'population':
                     $responseData = $this->geoInformation->getCityData($city);
@@ -36,7 +36,7 @@ class TraitementResponse
                     break;
                 case 'codePostal':
                     $responseData = $this->geoInformation->getCityData($city);
-                    $response     = [$city . ' possède les codes postaux suivant : '];
+                    $response     = [$city . ' possÃ¨de les codes postaux suivant : '];
                     foreach ($responseData->codesPostaux as $key => $data) {
                         array_push($response, $key+1 . ' : ' . $data);
                     }
@@ -45,7 +45,7 @@ class TraitementResponse
                     $responseData = $this->meteoInfo->getMeteo($city);
                     $time = preg_split('/ /',$responseData['dt_txt']);
 //                    var_dump($responseData['rain']['3h']);
-                    $response = ['Le '. $time[0] . ' à ' . $time[1] . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . '.', "La probalité de pluie dans les 3h est de : " . $responseData['rain']['3h']*100 . '%'];
+                    $response = ['Le '. $time[0] . ' Ã  ' . $time[1] . ', il devrait faire une tempÃ©rature de : ' . ceil($responseData['main']['temp']) . '.', "La probalitÃ© de pluie dans les 3h est de : " . $responseData['rain']['3h']*100 . '%'];
                     break;
             }
         } else {
