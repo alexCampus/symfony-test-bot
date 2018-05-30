@@ -30,8 +30,14 @@ class DefaultController extends Controller
                 break;
 
             case 'region':
-                $response = $this->getRegion($data["outputContexts"][0]["parameters"]["ville"]);
-                var_dump($response);die;
+                foreach ($data["outputContexts"] as $output) {
+                    $city = $output['parameters']['ville'] ?? null;
+                }
+                if ($city != null) {
+                    $response = $this->getRegion($city);
+                } else {
+                    $response = ["Oups je n'ai pas bien compris votre demande"];
+                }
                 break;
 
             case 'population':
