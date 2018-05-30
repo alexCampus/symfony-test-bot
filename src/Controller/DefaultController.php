@@ -26,7 +26,7 @@ class DefaultController extends Controller
             [
 //                'text' => ['text' => $responseText],
                 'card' => [
-                    'subtitle' => 'test',
+                    'title' => 'test',
                     "imageUri" => "https://www.testclan.com/images/testbot/siege/weapons/assault-rifles.jpg"
                 ],
             ]]];
