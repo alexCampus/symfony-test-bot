@@ -24,7 +24,7 @@ class DefaultController extends Controller
         $responseText = $this->webhook->getIntent($content['queryResult']);
         $response     = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [
             [
-                'text' => ['text' => $responseText],
+//                'text' => ['text' => $responseText],
                 'card' => [
                     'slack' => [
                         'attachment' => [
