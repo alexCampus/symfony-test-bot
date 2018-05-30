@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use DateTime;
+use DateTimeZone;
 
 class MeteoInformation
 {
@@ -17,6 +18,7 @@ class MeteoInformation
     private function getPrevisionMeteo($meteo)
     {
         $now       = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $timestamp1 = $now->format('Y-m-d H:i:s');
         $timestamp = $now->getTimestamp();
         var_dump($timestamp1);die;
