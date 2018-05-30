@@ -22,8 +22,7 @@ class DefaultController extends Controller
     {
         $content      = json_decode($request->getContent(), true);
         $responseText = $this->webhook->getIntent($content['queryResult']);
-        var_dump($responseText);die;
-        $response     = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [['text' => ['text' => $responseText]]
+        $response     = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [['card' => ['subtitle' => $responseText]]
 
         ]];
 
