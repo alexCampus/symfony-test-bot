@@ -25,7 +25,7 @@ class DefaultController extends Controller
         $response     = ['fulfillmentText' => 'Hello', 'fulfillmentMessages' => [
             [
                 'text' => ['text' => $responseText],
-                'data' => [
+                'card' => [
                     'slack' => [
                         'attachment' => [
                             "type" => "image",
