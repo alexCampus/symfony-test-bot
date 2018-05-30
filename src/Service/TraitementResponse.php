@@ -43,8 +43,8 @@ class TraitementResponse
                     break;
                 case 'meteo':
                     $responseData = $this->meteoInfo->getMeteo($city);
-//                    $response = ['A ' . $responseData->dt_txt . ', il fera une température de : ' . ceil($responseData->main->temp), "La probalité de pluie dans les 3h est de : " . $responseData->rain['3h']*100 . '%'];
-                    var_dump(preg_split('/ /',$responseData->dt_txt));die;
+                    $time = preg_split('/ /',$responseData->dt_txt);
+                    $response = ['Le '. $time[0] . ' à ' . $time[1] . ', il devrait faire une température de : ' . ceil($responseData->main->temp) . '.', "La probalité de pluie dans les 3h est de : " . $responseData->rain['3h']*100 . '%'];
                     break;
             }
         } else {
