@@ -46,7 +46,7 @@ class TraitementResponse
                     $time = preg_split('/ /',$responseData['dt_txt']);
                     $date =
 //                    var_dump($responseData['rain']['3h']);
-                    $response = ['Le '. date('d/M/Y',strtotime($time[0])) . ' à ' . $time[1] . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.', "La probalité de pluie dans les 3h est de : " . ceil($responseData['rain']['3h']*100) . '%'];
+                    $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('H:i',strtotime($time[0])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.', "La probalité de pluie dans les 3h est de : " . ceil($responseData['rain']['3h']*100) . '%'];
                     break;
             }
         } else {
