@@ -30,7 +30,7 @@ class DefaultController extends Controller
                     "imageUri" => "https://www.testclan.com/images/testbot/siege/weapons/assault-rifles.jpg",
                     "buttons" => [
                         [
-                            'text' => ['textttt', 'texxxxxxxxxxxxxxxxxxt']
+                            'text' => 'textttt'
                         ]
                     ]
                 ],
