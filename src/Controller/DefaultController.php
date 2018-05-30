@@ -72,8 +72,8 @@ class DefaultController extends Controller
                 if ($city != null) {
                     $responseData = $this->getCityData($city);
                     $response = array($city . ' possède les codes postaux suivant : ');
-                    foreach ($responseData->codesPostaux as $data) {
-                        array_push($response, $data);
+                    foreach ($responseData->codesPostaux as $key => $data) {
+                        array_push($response, $key . ' : ' . $data);
                     }
                 } else {
                     $response = ["Oups je n'ai pas bien compris votre demande"];
@@ -100,9 +100,10 @@ class DefaultController extends Controller
         return $str;
     }
 
-    private function getDepartement($code)
+    private function getDepartement($city)
     {
-        $dep = json_decode(file_get_contents("https://geo.api.gouv.fr/departements?code=" . $code . "&fields=nom,code"));
+        $data = $this->getCityData($city);
+        $dep = json_decode(file_get_contents("https://geo.api.gouv.fr/departements?code=" . $data->codeDepartement . "&fields=nom,code"));
         return $dep[0];
     }
 
