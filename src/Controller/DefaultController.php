@@ -42,8 +42,15 @@ class DefaultController extends Controller
                 break;
 
             case 'population':
-                $responseData = $this->getCityData($data["parameters"]["ville"]);
-                $response = ['A  ' . $responseData->nom, ", il y une population de " . number_format($responseData->population) . ' hab'];
+                foreach ($data["outputContexts"] as $output) {
+                    $city = $output['parameters']['ville'] ?? null;
+                }
+                if ($city != null) {
+                    $responseData = $this->getRegion($city);
+                    $response = ['A  ' . $responseData->nom, ", il y une population de " . number_format($responseData->population) . ' hab'];
+                } else {
+                    $response = ["Oups je n'ai pas bien compris votre demande"];
+                }
                 break;
 
             case 'departement':
