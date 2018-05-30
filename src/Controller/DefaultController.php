@@ -46,7 +46,7 @@ class DefaultController extends Controller
                     $city = $output['parameters']['ville'] ?? null;
                 }
                 if ($city != null) {
-                    $responseData = $this->getRegion($city);
+                    $responseData = $this->getCityData($city);
                     $response = ['A  ' . $responseData->nom, ", il y une population de " . number_format($responseData->population) . ' hab'];
                 } else {
                     $response = ["Oups je n'ai pas bien compris votre demande"];
