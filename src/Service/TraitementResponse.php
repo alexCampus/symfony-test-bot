@@ -49,16 +49,19 @@ class TraitementResponse
 
                     $time = preg_split('/ /',$responseData['dt_txt']);
                     $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
-                        "il devrait tombé dans en 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie'
-                        ];
+                        "il devrait tombé dans en 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie',
+                        'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'];
 
                     // Test message direct slack
                     $client = new Client();
                     $res = $client->request('POST', 'https://slack.com/api/files.upload', [
                         'form_params' => [
                             'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
-                            'channels' => 'général',
-                            'file'    => 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'
+                            'channel' => 'général',
+                            'text'    => 'hello poulet',
+                            'attachments' => [
+                                'image_url' => 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'
+                            ]
                         ]
                     ]);
                     // Test message direct slack
