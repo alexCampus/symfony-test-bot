@@ -51,7 +51,7 @@ class TraitementResponse
                         [
                             "fallback"=> "Required plain-text summary of the attachment.",
                             "text"=> "Optional text that appears within the attachment",
-                            "image_url"=> "http://my-website.com/path/to/image.jpg",
+                            "image_url"=> 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png',
                             "thumb_url"=> "http://example.com/path/to/thumb.png"
                         ]
                     ]);
