@@ -60,7 +60,8 @@ class TraitementResponse
                         'form_params' => [
                             'token'   => 'xoxp-371098517505-371098517713-371100337297-bf21886f4b5bd2102bf0801837bf3c0f',
                             'channel' => 'général',
-                            'text'    => 'hello poulet'
+                            'text'    => 'hello poulet',
+                            "attachments"=> $test
                         ]
                     ]);
                     // Test message direct slack
