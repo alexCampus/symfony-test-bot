@@ -21,14 +21,14 @@ class DefaultController extends Controller
     public function index(Request $request)
     {
         $content      = json_decode($request->getContent(), true);
-        var_dump($content);
+
         $responseText = $this->webhook->getIntent($content['queryResult']);
         $response     = ['fulfillmentText' => 'Hello',
                          'fulfillmentMessages' =>
                              [
                                  [
                                      'text' => [
-                                         'text' => $responseText
+                                         'text' => $content
                                      ]
                                  ]
                             ]
