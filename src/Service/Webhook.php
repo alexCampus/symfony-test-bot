@@ -37,7 +37,6 @@ class Webhook
                 break;
 
             case 'Meteo':
-                var_dump($data);
                 $response = $this->traitementResponse->traitementResponse($data["outputContexts"], 'meteo');
                 break;
 
