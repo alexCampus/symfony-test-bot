@@ -51,26 +51,6 @@ class TraitementResponse
                     $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
                         "il devrait tombé dans en 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie'
                         ];
-// Test message direct slack
-                    $test = json_encode([
-                        [
-                            "fallback"=> "Required plain-text summary of the attachment.",
-                            "text"=> "Optional text that appears within the attachment",
-                            "image_url"=> 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png',
-                            "thumb_url"=> "http://example.com/path/to/thumb.png"
-                        ]
-                    ]);
-                    $client = new Client();
-                    $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
-                        'form_params' => [
-                            'token'   => 'xoxp-371098517505-371098517713-376098897431-c585e8f41912188d4d59b33a713b0771',
-                            'channel' => 'général',
-                            'text'    => 'hello poulet',
-                            "attachments"=> $test
-                        ]
-                    ]);
-                    // Test message direct slack
-
                     break;
             }
         } else {
