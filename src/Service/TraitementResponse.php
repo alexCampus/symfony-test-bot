@@ -3,6 +3,9 @@
 namespace App\Service;
 
 
+use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\Response;
+
 class TraitementResponse
 {
     private $geoInformation;
@@ -43,6 +46,18 @@ class TraitementResponse
                     break;
                 case 'meteo':
                     $responseData = $this->meteoInfo->getMeteo($city);
+
+                    // Test message direct slack
+                    $client = new Client();
+                    $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
+                        'form_params' => [
+                            'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
+                            'channel' => 'général',
+                            'text'    => 'hello poulet'
+                        ]
+                    ]);
+                    // Test message direct slack
+
                     $time = preg_split('/ /',$responseData['dt_txt']);
                     $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
                         "il devrait tombé dans en 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie',
