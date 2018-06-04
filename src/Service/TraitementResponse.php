@@ -58,7 +58,7 @@ class TraitementResponse
                     $client = new Client();
                     $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
                         'form_params' => [
-                            'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
+                            'token'   => 'xoxp-371098517505-371098517713-371100337297-bf21886f4b5bd2102bf0801837bf3c0f',
                             'channel' => 'général',
                             'text'    => 'hello poulet'
                         ]
