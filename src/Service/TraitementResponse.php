@@ -49,20 +49,32 @@ class TraitementResponse
                     // Test message direct slack
                     $client = new Client();
                     $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
-                        'form_params' => [
-                            'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
-                            'channel' => 'général',
-                            'text'    => 'hello poulet',
-                            "attachments"=> [
-                                [
-                                    "fallback"=> "Required plain-text summary of the attachment.",
-                                    "text"=> "Optional text that appears within the attachment",
-                                    "image_url"=> "http://my-website.com/path/to/image.jpg",
-                                    "thumb_url"=> "http://example.com/path/to/thumb.png"
-                                ]
-                            ]
-                        ]
-                    ]);
+    "attachments"=> [
+        [
+            "fallback"=> "Required plain-text summary of the attachment.",
+            "color"=> "#36a64f",
+            "pretext"=> "Optional text that appears above the attachment block",
+            "author_name"=> "Bobby Tables",
+            "author_link"=> "http://flickr.com/bobby/",
+            "author_icon"=> "http://flickr.com/icons/bobby.jpg",
+            "title"=> "Slack API Documentation",
+            "title_link"=> "https://api.slack.com/",
+            "text"=> "Optional text that appears within the attachment",
+            "fields"=> [
+                [
+                    "title"=> "Priority",
+                    "value"=> "High",
+                    "short"=> false
+                ]
+            ],
+            "image_url"=> "http://my-website.com/path/to/image.jpg",
+            "thumb_url"=> "http://example.com/path/to/thumb.png",
+            "footer"=> "Slack API",
+            "footer_icon"=> "https://platform.slack-edge.com/img/default_application_icon.png",
+            "ts"=> 123456789
+        ]
+    ]
+            ]);
                     // Test message direct slack
 //                    $time = preg_split('/ /',$responseData['dt_txt']);
 //                    $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
