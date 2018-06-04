@@ -4,7 +4,6 @@ namespace App\Service;
 
 
 use GuzzleHttp\Client;
-use GuzzleHttp\RequestOptions;
 use Symfony\Component\HttpFoundation\Response;
 
 class TraitementResponse
@@ -48,20 +47,21 @@ class TraitementResponse
                 case 'meteo':
                     $responseData = $this->meteoInfo->getMeteo($city);
                     // Test message direct slack
+                    $test = json_encode([
+                        [
+                            "fallback"=> "Required plain-text summary of the attachment.",
+                            "text"=> "Optional text that appears within the attachment",
+                            "image_url"=> "http://my-website.com/path/to/image.jpg",
+                            "thumb_url"=> "http://example.com/path/to/thumb.png"
+                        ]
+                    ]);
                     $client = new Client();
                     $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
-                        RequestOptions::JSON => [
+                        'form_params' => [
                             'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
                             'channel' => 'général',
                             'text'    => 'hello poulet',
-                            "attachments"=> [
-                                [
-                                    "fallback"=> "Required plain-text summary of the attachment.",
-                                    "text"=> "Optional text that appears within the attachment",
-                                    "image_url"=> "http://my-website.com/path/to/image.jpg",
-                                    "thumb_url"=> "http://example.com/path/to/thumb.png"
-                                ]
-                            ]
+                            "attachments"=> $test
                         ]
                     ]);
                     // Test message direct slack
