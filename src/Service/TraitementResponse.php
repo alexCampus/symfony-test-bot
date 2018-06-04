@@ -46,13 +46,15 @@ class TraitementResponse
                     break;
                 case 'meteo':
                     $responseData = $this->meteoInfo->getMeteo($city);
+
+                    $time = preg_split('/ /',$responseData['dt_txt']);
+                    $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
+                        "il devrait tombé dans en 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie'
+                      ];
                     // Test message direct slack
                     $test = json_encode([
                         [
-                            "fallback"=> "Required plain-text summary of the attachment.",
-                            "text"=> "Optional text that appears within the attachment",
                             "image_url"=> 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png',
-                            "thumb_url"=> "http://example.com/path/to/thumb.png"
                         ]
                     ]);
                     $client = new Client();
@@ -65,11 +67,6 @@ class TraitementResponse
                         ]
                     ]);
                     // Test message direct slack
-                    $time = preg_split('/ /',$responseData['dt_txt']);
-                    $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
-                        "il devrait tombé dans en 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie',
-                        'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'];
-
 
                     break;
             }
