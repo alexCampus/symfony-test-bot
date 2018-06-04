@@ -57,7 +57,7 @@ class TraitementResponse
                     $res = $client->request('POST', 'https://slack.com/api/files.upload', [
                         'form_params' => [
                             'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
-                            'channel' => 'général',
+                            'channels' => 'général',
                             'file'    => 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'
                         ]
                     ]);
