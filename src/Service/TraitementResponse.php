@@ -48,7 +48,7 @@ class TraitementResponse
                     $responseData = $this->meteoInfo->getMeteo($city);
                     // Test message direct slack
                     $client = new Client();
-                    $res = $client->request('POST', 'https://slack.com/api/files.upload', [
+                    $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
                         'form_params' => [
                             'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
                             'channel' => 'général',
