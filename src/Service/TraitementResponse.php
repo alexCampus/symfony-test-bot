@@ -53,9 +53,9 @@ class TraitementResponse
                             'token'   => 'xoxp-371098517505-371098517713-376014330567-066539b85aa89593ff9fd045740ab3fa',
                             'channel' => 'général',
                             'text'    => 'hello poulet',
-                            'attachments' => [
-                                'image_url' => 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'
-                            ]
+//                            'attachments' => [
+//                                'image_url' => 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png'
+//                            ]
                         ]
                     ]);
                     // Test message direct slack
