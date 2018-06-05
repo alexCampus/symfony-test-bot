@@ -89,6 +89,7 @@ class TraitementResponse
                     $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
                         "il devrait tombé dans 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie'
                         ];
+                    return $response;
                     sleep(5);
                     $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
                         'form_params' => [
@@ -103,6 +104,6 @@ class TraitementResponse
         } else {
             $response = ["Oups je n'ai pas bien compris votre demande"];
         }
-        return $response;
+//        return $response;
     }
 }
