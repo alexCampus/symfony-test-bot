@@ -84,30 +84,25 @@ class TraitementResponse
                         ]
                     ]);
                     $client = new Client();
-                    $res = $this->setTimeout($client->request('POST', 'https://slack.com/api/chat.postMessage', [
+                    // Test message direct slack
+                    $time = preg_split('/ /',$responseData['dt_txt']);
+                    $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
+                        "il devrait tombé dans 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie'
+                        ];
+                    sleep(5);
+                    $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
                         'form_params' => [
                             'token'   => getenv('slack-api'),
                             'channel' => 'général',
                             'text'    => 'hello poulet',
                             "attachments"=> $test
                         ]
-                    ]), 5000);
-                    // Test message direct slack
-                    $time = preg_split('/ /',$responseData['dt_txt']);
-                    $response = ['Le '. date('d M Y',strtotime($time[0])) . ' à ' . date('G:i',strtotime($responseData['dt_txt'])) . ', il devrait faire une température de : ' . ceil($responseData['main']['temp']) . ' degrés.',
-                        "il devrait tombé dans 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie'
-                        ];
+                    ]);
                     break;
             }
         } else {
             $response = ["Oups je n'ai pas bien compris votre demande"];
         }
         return $response;
-    }
-
-    private function setTimeout($fn, $timeout){
-        // sleep for $timeout milliseconds.
-        sleep(($timeout/1000));
-        $fn;
     }
 }
