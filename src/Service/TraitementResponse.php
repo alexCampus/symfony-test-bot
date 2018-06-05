@@ -49,10 +49,38 @@ class TraitementResponse
                     // Test message direct slack
                     $test = json_encode([
                         [
-                            "fallback"=> "Required plain-text summary of the attachment.",
-                            "text"=> "Optional text that appears within the attachment",
-                            "image_url"=> 'http://openweathermap.org/img/w/' . $responseData['weather'][0]['icon'] . '.png',
-                            "thumb_url"=> "http://example.com/path/to/thumb.png"
+                            "fallback" => "You are unable to choose a game",
+                            "callback_id" => "wopr_game",
+                            "text" => "Choose a game to play",
+                            "color" => "#3AA3E3",
+                            "attachment_type" => "default",
+                            "actions" => [
+                                [
+                                    "name" => "game",
+                                    "text" => "Chess",
+                                    "type" => "button",
+                                    "value" => "chess"
+                                ],
+                                [
+                                    "name" => "game",
+                                    "text" => "Falken's Maze",
+                                    "type" => "button",
+                                    "value" => "maze"
+                                ],
+                                [
+                                    "name" => "game",
+                                    "text" => "Thermonuclear War",
+                                    "style" => "danger",
+                                    "type" => "button",
+                                    "value" => "war",
+                                    "confirm" => [
+                                        "title" => "Are you sure?",
+                                        "text" => "Wouldn't you prefer a good game of chess?",
+                                        "ok_text" => "Yes",
+                                        "dismiss_text" => "No"
+                                    ]
+                                ]
+                            ]
                         ]
                     ]);
                     $client = new Client();
