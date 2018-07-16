@@ -47,42 +47,42 @@ class TraitementResponse
                 case 'meteo':
                     $responseData = $this->meteoInfo->getMeteo($city);
                     // Test message direct slack
-                    $test = json_encode([
-                        [
-                            "fallback" => "You are unable to choose a game",
-                            "callback_id" => "wopr_game",
-                            "text" => "Choose a game to play",
-                            "color" => "#3AA3E3",
-                            "attachment_type" => "default",
-                            "actions" => [
-                                [
-                                    "name" => "game",
-                                    "text" => "Chess",
-                                    "type" => "button",
-                                    "value" => "chess"
-                                ],
-                                [
-                                    "name" => "game",
-                                    "text" => "Falken's Maze",
-                                    "type" => "button",
-                                    "value" => "maze"
-                                ],
-                                [
-                                    "name" => "game",
-                                    "text" => "Thermonuclear War",
-                                    "style" => "danger",
-                                    "type" => "button",
-                                    "value" => "war",
-                                    "confirm" => [
-                                        "title" => "Are you sure?",
-                                        "text" => "Wouldn't you prefer a good game of chess?",
-                                        "ok_text" => "Yes",
-                                        "dismiss_text" => "No"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]);
+//                    $test = json_encode([
+//                        [
+//                            "fallback" => "You are unable to choose a game",
+//                            "callback_id" => "wopr_game",
+//                            "text" => "Choose a game to play",
+//                            "color" => "#3AA3E3",
+//                            "attachment_type" => "default",
+//                            "actions" => [
+//                                [
+//                                    "name" => "game",
+//                                    "text" => "Chess",
+//                                    "type" => "button",
+//                                    "value" => "chess"
+//                                ],
+//                                [
+//                                    "name" => "game",
+//                                    "text" => "Falken's Maze",
+//                                    "type" => "button",
+//                                    "value" => "maze"
+//                                ],
+//                                [
+//                                    "name" => "game",
+//                                    "text" => "Thermonuclear War",
+//                                    "style" => "danger",
+//                                    "type" => "button",
+//                                    "value" => "war",
+//                                    "confirm" => [
+//                                        "title" => "Are you sure?",
+//                                        "text" => "Wouldn't you prefer a good game of chess?",
+//                                        "ok_text" => "Yes",
+//                                        "dismiss_text" => "No"
+//                                    ]
+//                                ]
+//                            ]
+//                        ]
+//                    ]);
                     $client = new Client();
                     // Test message direct slack
                     $time = preg_split('/ /',$responseData['dt_txt']);
@@ -90,14 +90,14 @@ class TraitementResponse
                         "il devrait tombé dans 3h : " . ceil($responseData['rain']['3h']) . 'mm de pluie'
                         ];
 
-                    $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
-                        'form_params' => [
-                            'token'   => getenv('slack-api'),
-                            'channel' => 'général',
-                            'text'    => 'hello poulet',
-                            "attachments"=> $test
-                        ]
-                    ]);
+//                    $res = $client->request('POST', 'https://slack.com/api/chat.postMessage', [
+//                        'form_params' => [
+//                            'token'   => getenv('slack-api'),
+//                            'channel' => 'général',
+//                            'text'    => 'hello poulet'
+////                            "attachments"=> $test
+//                        ]
+//                    ]);
                     break;
             }
         } else {
